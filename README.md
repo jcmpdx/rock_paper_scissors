@@ -1,2 +1,2 @@
-# rock_paper_scissors
-https://www.theodinproject.com/lessons/foundations-rock-paper-scissors
+# Rock Paper Scissors game in JavaScript
+Following lesson found on https://www.theodinproject.com/lessons/foundations-rock-paper-scissors
