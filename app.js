@@ -21,12 +21,12 @@ function playRound(playerSelection, computerSelection) {
     while (computerSelection == 'rock') {
         if (playerSelection == 'paper') {
             console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-            winCount += 1;
+            return score += 1;
         } else if (playerSelection == computerSelection) {
             console.log(`Tie! Both selected ${playerSelection}`);
         } else if (playerSelection == 'scissors') {
             console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-            loseCount += 1;
+            return score -= 1;
         } else {
             console.log('Enter a valid input of rock, paper, or scissors');
         }
@@ -35,12 +35,12 @@ function playRound(playerSelection, computerSelection) {
     while (computerSelection == 'paper') {
         if (playerSelection == 'scissors') {
             console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-            winCount += 1;
+            return score += 1;
         } else if (playerSelection == computerSelection) {
             console.log(`Tie! Both selected ${playerSelection}`);
         } else if (playerSelection == 'rock') {
             console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-            loseCount += 1; 
+            return score -= 1;
         } else {
             console.log('Enter a valid input of rock, paper, or scissors');
         }
@@ -49,12 +49,12 @@ function playRound(playerSelection, computerSelection) {
     while (computerSelection == 'scissors') {
         if (playerSelection == 'rock') {
             console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-            winCount += 1;
+            return score += 1;
         } else if (playerSelection == computerSelection) {
             console.log(`Tie! Both selected ${playerSelection}`);
         } else if (playerSelection == 'paper') {
             console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-            loseCount += 1; 
+            return score -= 1; 
         } else {
             console.log('Enter a valid input of rock, paper, or scissors');
         }
@@ -63,25 +63,30 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    let score = winCount + '-wins ' + loseCount + '-losses';
+    let scoreMessage = '';
     for (let i = 0; i < 5; i++) {
         playRound();
         if (playerSelection == 'bad') {
             i--;   
         }
     }
-    (winCount > loseCount) ? alert('You win! ' + score) :
-    (winCount == loseCount) ? alert('Tie game! ' + score) : 
-    alert('You lose! ' + score);
+    (score > 0) ? scoreMessage = 'You win! Play again?' :
+    (score == 0) ? scoreMessage = 'Tie game! Play again?' : 
+    scoreMessage = 'You lose! Play again?';
+    if (confirm(scoreMessage)) {
+        game();
+    } else {
+        console.log('Game ended')
+    }
 }
 
 const array = ['rock', 'paper', 'scissors'];
 let playerSelection = '';
 let computerSelection = '';
-let winCount = 0;
-let loseCount = 0;
+let score = 0;
 
 game();
 
+
+
 // score not updating winCount and loseCount at end of game
-// need to make OK at incorrect input alert continue game
