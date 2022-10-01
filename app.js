@@ -2,7 +2,6 @@ function getComputerChoice() {
     computerSelection = array[Math.floor(Math.random() * array.length)];
     return computerSelection;
 }
-
 function getPlayerChoice() {
     let playerChoice = prompt("Rock Paper or Scissors?",'');
     playerSelection = playerChoice.toLowerCase();
@@ -12,56 +11,29 @@ function getPlayerChoice() {
     }
     return playerSelection;
 }
-
 function playRound(playerSelection, computerSelection) {
     playerSelection = getPlayerChoice();
     computerSelection = getComputerChoice();
     console.log('player selected: ' + playerSelection);
     console.log('computer selected: ' + computerSelection);
-    while (computerSelection == 'rock') {
-        if (playerSelection == 'paper') {
-            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-            return score += 1;
-        } else if (playerSelection == computerSelection) {
-            console.log(`Tie! Both selected ${playerSelection}`);
-        } else if (playerSelection == 'scissors') {
-            console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-            return score -= 1;
-        } else {
-            console.log('Enter a valid input of rock, paper, or scissors');
-        }
-        break;
-    }
-    while (computerSelection == 'paper') {
-        if (playerSelection == 'scissors') {
-            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-            return score += 1;
-        } else if (playerSelection == computerSelection) {
-            console.log(`Tie! Both selected ${playerSelection}`);
-        } else if (playerSelection == 'rock') {
-            console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-            return score -= 1;
-        } else {
-            console.log('Enter a valid input of rock, paper, or scissors');
-        }
-        break;
-    }
-    while (computerSelection == 'scissors') {
-        if (playerSelection == 'rock') {
-            console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-            return score += 1;
-        } else if (playerSelection == computerSelection) {
-            console.log(`Tie! Both selected ${playerSelection}`);
-        } else if (playerSelection == 'paper') {
-            console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-            return score -= 1; 
-        } else {
-            console.log('Enter a valid input of rock, paper, or scissors');
-        }
-        break;
+    if (playerSelection !== 'rock' || playerSelection !== 'paper' || playerSelection !== 'scissors') {
+        return;
+    } else if (playerSelection == computerSelection) {
+        console.log(`Tie! Both selected ${playerSelection}`);
+    } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+        return score += 1;
+    } else if (playerSelection == 'paper' && computerSelection == 'rock') {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+        return score += 1;
+    } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+        return score += 1;
+    } else {
+        console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+        return score -= 1;
     }
 }
-
 function game() {
     let scoreMessage = '';
     for (let i = 0; i < 5; i++) {
@@ -79,7 +51,6 @@ function game() {
         console.log('Game ended')
     }
 }
-
 const array = ['rock', 'paper', 'scissors'];
 let playerSelection = '';
 let computerSelection = '';
@@ -87,6 +58,4 @@ let score = 0;
 
 game();
 
-
-
-// score not updating winCount and loseCount at end of game
+// prematurely quiting the game causes typeErrors
