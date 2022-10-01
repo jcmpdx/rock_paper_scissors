@@ -6,7 +6,6 @@ function getPlayerChoice() {
     let playerChoice = prompt("Rock Paper or Scissors?",'');
     playerSelection = playerChoice.toLowerCase();
     if (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
-        alert(`Invalid input. Type rock, paper, or scissors as an input.`);
         playerSelection = 'bad';
     }
     return playerSelection;
@@ -14,10 +13,10 @@ function getPlayerChoice() {
 function playRound(playerSelection, computerSelection) {
     playerSelection = getPlayerChoice();
     computerSelection = getComputerChoice();
-    console.log('player selected: ' + playerSelection);
-    console.log('computer selected: ' + computerSelection);
-    if (playerSelection !== 'rock' || playerSelection !== 'paper' || playerSelection !== 'scissors') {
-        return;
+    const wrongChoice = 'Invalid input. Type rock, paper, or scissors as an input.'
+    if (playerSelection == 'bad') {
+        console.log(wrongChoice);
+        alert(wrongChoice);
     } else if (playerSelection == computerSelection) {
         console.log(`Tie! Both selected ${playerSelection}`);
     } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
@@ -48,7 +47,8 @@ function game() {
     if (confirm(scoreMessage)) {
         game();
     } else {
-        console.log('Game ended')
+        console.log('Game ended');
+        return;
     }
 }
 const array = ['rock', 'paper', 'scissors'];
