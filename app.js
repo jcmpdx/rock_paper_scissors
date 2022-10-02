@@ -21,6 +21,12 @@ function playRound(playerSelection, computerSelection) {
     }
     resultContainer.appendChild(resultString);
 }
+function gameOver(n) {
+    // Update resultString
+    if (x = 1) resultString.textContent = `You won this round!!! Click on a button to start a new game.`;
+    if (x = 2) resultString.textContent = `Sorry, you lost this round. Click on a button to start a new game.`;
+    else resultString.textContent = `This round was a tie. Click on a button to start a new game.`;
+};
 function game() {
     btn.forEach((button) => {
         button.addEventListener('click', () => {
@@ -29,12 +35,22 @@ function game() {
             moves++;
             movesLeft.textContent = `Moves Remaining: ${rounds-moves}`;
             if (moves == rounds) {
-                alert('game over');
+                if (winPts > lossPts) {
+                    gameOver(1);
+                } else if (winPts < lossPts) {
+                    gameOver(2);
+                } else {
+                    gameOver();
+                }
+                moves = 0;
+                winPts = 0;
+                lossPts = 0;
+                wins.textContent = '-';
+                losses.textContent = '-'; 
             }
         });
     });
 }
-
 
 const array = ['rock', 'paper', 'scissors'];
 let playerSelection = '';
@@ -45,11 +61,12 @@ let lossPts = 0;
 const rounds = 5;
 const btn = document.querySelectorAll('button');
 const resultContainer = document.querySelector('.result');
-const resultString = document.createElement('p');
+const resultString = document.createElement('div');
+resultString.style.cssText = 'margin: 0 200px';
 const wins = document.querySelector('#wins');
 const losses = document.querySelector('#losses');
 const movesLeft = document.querySelector('.moves');
 movesLeft.textContent = `Moves Remaining: ${rounds-moves}`;
 game();
 
-// prematurely quiting the game causes typeErrors
+// Want to create overlay for gameOver()
