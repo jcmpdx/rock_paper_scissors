@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap');
+
 body {
     font-size: 32px;
     text-align: center;
     margin: 64px 0;
+    font-family: 'Lato', sans-serif;
 }
 
 .container {
@@ -17,4 +20,22 @@ body {
     color: white;
     background-color: black;
     border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+}
+
+.result {
+    height: 150px;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 22px 0;
+}
+
+.points {
+    display: flex;
+    flex-direction: column;
 }

@@ -5,19 +5,25 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     computerSelection = getComputerChoice();
     const wrongChoice = 'Invalid input. Type rock, paper, or scissors as an input.'
-    if (playerSelection == 'bad') {
-        console.log(wrongChoice);
-        alert(wrongChoice);
-    } else if (playerSelection == computerSelection) {
+    if (playerSelection == computerSelection) {
+        resultString.textContent = `Tie! Both selected ${playerSelection}`
         console.log(`Tie! Both selected ${playerSelection}`);
     } else if ((playerSelection == 'rock' && computerSelection == 'scissors') || (playerSelection == 'paper' && computerSelection == 'rock') || ((playerSelection == 'scissors' && computerSelection == 'paper'))) {
+        resultString.textContent = `You win! ${playerSelection} beats ${computerSelection}`
         console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-        return score += 1;
+        return winPts += 1;
     } else {
+        resultString.textContent = `You lose! ${computerSelection} beats ${playerSelection}`
         console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-        return score -= 1;
+        return lossPts += 1;
     }
+    resultContainer.appendChild(resultString);
 }
+
+function updateScore(w, l) {
+    // function to update the textContent for the #wins and #losses id in the document
+}
+
 function gameFive() {
     let scoreMessage = '';
     for (let i = 0; i < 5; i++) {
@@ -59,6 +65,8 @@ const array = ['rock', 'paper', 'scissors'];
 let playerSelection = '';
 let computerSelection = '';
 let score = 0;
+let winPts = 0;
+let lossPts = 0;
 const btn = document.querySelectorAll('button');
 btn.forEach((button) => {
     button.addEventListener('click', () => {
@@ -66,6 +74,9 @@ btn.forEach((button) => {
         playRound(playerSelection=button.id, computerSelection);
     });
 });
-// gameOne();
+const resultContainer = document.querySelector('.result');
+const resultString = document.createElement('p');
+const wins = document.querySelector('#wins');
+const losses = document.querySelector('#losses');
 
 // prematurely quiting the game causes typeErrors
