@@ -2,16 +2,7 @@ function getComputerChoice() {
     computerSelection = array[Math.floor(Math.random() * array.length)];
     return computerSelection;
 }
-function getPlayerChoice() {
-    let playerChoice = prompt("Rock Paper or Scissors?",'');
-    playerSelection = playerChoice.toLowerCase();
-    if (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
-        playerSelection = 'bad';
-    }
-    return playerSelection;
-}
 function playRound(playerSelection, computerSelection) {
-    playerSelection = getPlayerChoice();
     computerSelection = getComputerChoice();
     const wrongChoice = 'Invalid input. Type rock, paper, or scissors as an input.'
     if (playerSelection == 'bad') {
@@ -19,13 +10,7 @@ function playRound(playerSelection, computerSelection) {
         alert(wrongChoice);
     } else if (playerSelection == computerSelection) {
         console.log(`Tie! Both selected ${playerSelection}`);
-    } else if (playerSelection == 'rock' && computerSelection == 'scissors') {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-        return score += 1;
-    } else if (playerSelection == 'paper' && computerSelection == 'rock') {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-        return score += 1;
-    } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+    } else if ((playerSelection == 'rock' && computerSelection == 'scissors') || (playerSelection == 'paper' && computerSelection == 'rock') || ((playerSelection == 'scissors' && computerSelection == 'paper'))) {
         console.log(`You win! ${playerSelection} beats ${computerSelection}`);
         return score += 1;
     } else {
@@ -33,29 +18,54 @@ function playRound(playerSelection, computerSelection) {
         return score -= 1;
     }
 }
-function game() {
+function gameFive() {
     let scoreMessage = '';
     for (let i = 0; i < 5; i++) {
         playRound();
         if (playerSelection == 'bad') {
-            i--;   
+            i--;
         }
     }
     (score > 0) ? scoreMessage = 'You win! Play again?' :
     (score == 0) ? scoreMessage = 'Tie game! Play again?' : 
     scoreMessage = 'You lose! Play again?';
     if (confirm(scoreMessage)) {
-        game();
+        gameFive();
     } else {
         console.log('Game ended');
         return;
     }
 }
+function gameOne() {
+    let scoreMessage = '';
+    for (let i = 0; i < 1; i++) {
+        playRound();
+        if (playerSelection == 'bad') {
+            i--;
+        }
+    }
+    (score > 0) ? scoreMessage = 'You win! Play again?' :
+    (score == 0) ? scoreMessage = 'Tie game! Play again?' : 
+    scoreMessage = 'You lose! Play again?';
+    if (confirm(scoreMessage)) {
+        gameOne();
+    } else {
+        console.log('Game ended');
+        return;
+    }
+}
+
 const array = ['rock', 'paper', 'scissors'];
 let playerSelection = '';
 let computerSelection = '';
 let score = 0;
-
-game();
+const btn = document.querySelectorAll('button');
+btn.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log(button.id);
+        playRound(playerSelection=button.id, computerSelection);
+    });
+});
+// gameOne();
 
 // prematurely quiting the game causes typeErrors
