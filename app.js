@@ -69,4 +69,4 @@ const movesLeft = document.querySelector('.moves');
 movesLeft.textContent = `Moves Remaining: ${rounds-moves}`;
 game();
 
-// Want to create overlay for gameOver()
+// Want to create overlay for gameOver() 
